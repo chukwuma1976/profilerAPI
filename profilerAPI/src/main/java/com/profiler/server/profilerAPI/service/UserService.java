@@ -2,6 +2,7 @@ package com.profiler.server.profilerAPI.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.profiler.server.profilerAPI.exception.UserNotFoundException;
@@ -11,12 +12,8 @@ import com.profiler.server.profilerAPI.repository.UserRepository;
 @Service
 public class UserService {
 	
+	@Autowired
 	private UserRepository userRepo;
-
-	public UserService(UserRepository userRepo) {
-		super();
-		this.userRepo = userRepo;
-	}
 	
 	public User createUser(User user) {
 		return userRepo.save(user);

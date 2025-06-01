@@ -2,24 +2,34 @@ package com.profiler.server.profilerAPI.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.profiler.server.profilerAPI.exception.ResumeNotFoundException;
+import com.profiler.server.profilerAPI.exception.UserNotFoundException;
 import com.profiler.server.profilerAPI.model.Resume;
+import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.repository.ResumeRepository;
+import com.profiler.server.profilerAPI.repository.UserRepository;
 
 @Service
 public class ResumeService {
 
+	@Autowired
 	private ResumeRepository resumeRepo;
-	
-	public ResumeService(ResumeRepository resumeRepo) {
-		super();
-		this.resumeRepo = resumeRepo;
-	}
+	@Autowired
+	private UserRepository userRepo;
 	
 	public Resume createResume (Resume resume) {
 		return this.resumeRepo.save(resume);
+	}
+	
+	public Resume addResumeByUser (Resume resume, String userId) {
+		if (this.userRepo.findById(userId).isPresent()) {
+			User user = this.userRepo.findById(userId).get();
+			user.getResumes().add(resume);
+			return resume;
+		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
 	
 	public List<Resume> getAllResumes(){
