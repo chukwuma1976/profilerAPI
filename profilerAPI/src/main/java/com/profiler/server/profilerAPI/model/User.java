@@ -41,15 +41,15 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private ArrayList<Resume> resumes;
+	
+	private String resetToken; // for forgot password
     
-	public User(
-			@NotNull(message = "You must enter a user name") @NotBlank(message = "You must enter a user name") String username,
-			@NotNull(message = "You must enter a password") @NotBlank(message = "You must enter a password") String password,
-			@NotNull(message = "You must enter an email") @NotBlank(message = "You must enter an email") String email) {
+	public User(String username, String password, String email) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.resumes = new ArrayList<Resume>();
 	}
 	public String getId() {
 		return id;
@@ -81,6 +81,12 @@ public class User {
 	}
 	public void setResumes(ArrayList<Resume> resumes) {
 		this.resumes = resumes;
+	}
+	public String getResetToken() {
+		return resetToken;
+	}
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 	@Override
 	public String toString() {

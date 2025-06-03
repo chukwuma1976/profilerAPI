@@ -1,5 +1,6 @@
 package com.profiler.server.profilerAPI.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,18 @@ public class ResumeService {
 	public Resume addResumeByUser (Resume resume, String userId) {
 		if (this.userRepo.findById(userId).isPresent()) {
 			User user = this.userRepo.findById(userId).get();
-			user.getResumes().add(resume);
+			resume.setUser(user);
+			ArrayList<Resume> resumes = user.getResumes();
+			resumes.add(resume);
+			user.setResumes(resumes);
+			this.userRepo.save(user);
 			return resume;
 		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
 	
+	//This only gets Resumes that are allowed to be shared with other users
 	public List<Resume> getAllResumes(){
-		return this.resumeRepo.findAll();
+		return this.resumeRepo.findAllResumesThatCanBeShared();
 	}
 	
 	public Resume getResumeById (String id) {

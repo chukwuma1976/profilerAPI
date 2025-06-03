@@ -19,7 +19,7 @@ public class UserService {
 		return userRepo.save(user);
 	}
 	
-	public List<User> getAccounts (){
+	public List<User> getUsers (){
 		return userRepo.findAll();
 	}
 	

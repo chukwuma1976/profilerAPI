@@ -59,7 +59,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		    <!-- Spring Boot Security (for BCrypt) -->
+		<!-- Spring Boot Security (for BCrypt) -->
 	    <dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-security</artifactId>
@@ -67,9 +67,14 @@
 	    <!-- Optional: Lombok for cleaner code -->
 	    <dependency>
 	        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
+	        <artifactId>lombok</artifactId>
+	        <optional>true</optional>
+	    </dependency>
+	    <dependency>
+	    	<groupId>com.fdmgroup</groupId>
+	    	<artifactId>bakery-api</artifactId>
+	    	<version>0.0.1-SNAPSHOT</version>
+	    </dependency>
 	</dependencies>
 
 	<build>

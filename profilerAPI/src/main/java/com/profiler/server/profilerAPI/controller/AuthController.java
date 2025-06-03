@@ -2,8 +2,6 @@ package com.profiler.server.profilerAPI.controller;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +9,7 @@ import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.service.AuthService;
 
 @RestController
-@RequestMapping("api/v1/profilerusers/auth")
+@RequestMapping("api/v1/profiler/users/auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
@@ -48,5 +46,19 @@ public class AuthController {
     public String checkSession(HttpSession session) {
         String username = (String) session.getAttribute("username");
         return username != null ? "Logged in as " + username : "Not logged in";
+    }
+    
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestBody User body) {
+        String token = authService.initiatePasswordReset(body.getUsername());
+        return token != null
+            ? "Password reset token (simulate email): " + token
+            : "User not found.";
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestBody User body) {
+        boolean result = authService.resetPassword(body.getResetToken(), body.getPassword());
+        return result ? "Password reset successfully." : "Invalid or expired token.";
     }
 }
