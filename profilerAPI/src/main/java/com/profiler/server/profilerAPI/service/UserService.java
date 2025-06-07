@@ -29,9 +29,14 @@ public class UserService {
 		else throw new UserNotFoundException("User with id " + id + " does not exist");
 	}
 	
+	public User getUserByUsername(String username) {
+		if (userRepo.findByUsername(username) != null)
+			return userRepo.findByUsername(username);
+		else throw new UserNotFoundException("User with username " + username + "does not exist");
+	}
+	
 	public User updateUser(User user) {
 		User updatedUser = userRepo.findById(user.getId()).get();
-		updatedUser.setUsername(user.getUsername());
 		updatedUser.setPassword(user.getPassword());
 		updatedUser.setEmail(user.getEmail());
 		return userRepo.save(updatedUser);

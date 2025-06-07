@@ -7,5 +7,5 @@ import com.profiler.server.profilerAPI.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
+	User findByUsername(String username);
 }

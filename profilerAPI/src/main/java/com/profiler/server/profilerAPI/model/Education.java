@@ -2,11 +2,6 @@ package com.profiler.server.profilerAPI.model;
 
 import java.util.ArrayList;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import jakarta.persistence.Entity;
-
 public class Education {
 	
     private String institution;

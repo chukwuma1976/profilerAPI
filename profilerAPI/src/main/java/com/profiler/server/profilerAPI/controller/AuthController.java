@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.service.AuthService;
-import com.profiler.server.profilerAPI.service.UserService;
 
 @RestController
-@RequestMapping("api/v1/profiler/users/auth")
+@RequestMapping("api/v1/profiler/auth")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
     @Autowired
