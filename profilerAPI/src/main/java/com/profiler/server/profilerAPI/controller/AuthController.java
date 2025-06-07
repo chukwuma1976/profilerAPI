@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.*;
 
 import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.service.AuthService;
+import com.profiler.server.profilerAPI.service.UserService;
 
 @RestController
 @RequestMapping("api/v1/profiler/users/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
     @Autowired
     private AuthService authService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     public String register(@RequestBody User body) {
@@ -20,14 +24,16 @@ public class AuthController {
         String password = body.getPassword();
         String email = body.getEmail();
         boolean success = authService.register(username, password, email);
-        return success ? "User registered" : "User already exists";
+        if (success) {
+        	userService.createUser(body);
+        	return "User registered";
+        } else return "User already exists";
     }
 
     @PostMapping("/login")
     public String login(@RequestBody User body, HttpSession session) {
         String username = body.getUsername();
         String password = body.getPassword();
-
         if (authService.authenticate(username, password)) {
             session.setAttribute("username", username);
             return "Login successful";

@@ -1,6 +1,6 @@
 package com.profiler.server.profilerAPI.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -40,7 +40,7 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Resume> resumes;
+    private List<Resume> resumes;
 	
 	private String resetToken; // for forgot password
     
@@ -49,7 +49,6 @@ public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		this.resumes = new ArrayList<Resume>();
 	}
 	public String getId() {
 		return id;
@@ -76,10 +75,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public ArrayList<Resume> getResumes() {
+	public List<Resume> getResumes() {
 		return resumes;
 	}
-	public void setResumes(ArrayList<Resume> resumes) {
+	public void setResumes(List<Resume> resumes) {
 		this.resumes = resumes;
 	}
 	public String getResetToken() {

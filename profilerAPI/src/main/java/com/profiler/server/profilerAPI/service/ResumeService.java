@@ -1,6 +1,5 @@
 package com.profiler.server.profilerAPI.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class ResumeService {
 		if (this.userRepo.findById(userId).isPresent()) {
 			User user = this.userRepo.findById(userId).get();
 			resume.setUser(user);
-			ArrayList<Resume> resumes = user.getResumes();
+			List<Resume> resumes = user.getResumes();
 			resumes.add(resume);
 			user.setResumes(resumes);
 			this.userRepo.save(user);
