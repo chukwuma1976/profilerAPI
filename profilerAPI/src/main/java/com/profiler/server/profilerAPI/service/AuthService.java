@@ -1,16 +1,21 @@
 package com.profiler.server.profilerAPI.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.profiler.server.profilerAPI.model.User;
+import com.profiler.server.profilerAPI.repository.UserRepository;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AuthService {
+	
+	@Autowired
+	private UserRepository userRepo;
 
     private final ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -18,7 +23,9 @@ public class AuthService {
     public boolean register(String username, String password, String email) {
         if (users.containsKey(username)) return false;
         String hashed = passwordEncoder.encode(password);
-        users.put(username, new User(username, hashed, email));
+        User newUser = new User(username, hashed, email);
+        userRepo.save(newUser);
+        users.put(username, newUser);
         return true;
     }
 

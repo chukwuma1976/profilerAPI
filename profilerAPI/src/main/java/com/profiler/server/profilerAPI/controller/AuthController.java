@@ -15,8 +15,6 @@ import com.profiler.server.profilerAPI.service.UserService;
 public class AuthController {
     @Autowired
     private AuthService authService;
-    @Autowired
-    private UserService userService;
 
     @PostMapping("/register")
     public String register(@RequestBody User body) {
@@ -24,10 +22,7 @@ public class AuthController {
         String password = body.getPassword();
         String email = body.getEmail();
         boolean success = authService.register(username, password, email);
-        if (success) {
-        	userService.createUser(body);
-        	return "User registered";
-        } else return "User already exists";
+        return success ? "User registered" : "User already exists";
     }
 
     @PostMapping("/login")
