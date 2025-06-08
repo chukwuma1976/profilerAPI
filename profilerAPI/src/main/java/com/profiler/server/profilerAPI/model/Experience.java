@@ -1,16 +1,40 @@
 package com.profiler.server.profilerAPI.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Component
+@Scope("prototype")
+@Table(name = "Experience")
 public class Experience {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String employer ;
 	private String title;
 	private String city;
 	private String state;
     private String startDate;
     private String endDate;
-    private ArrayList<String> description;
+    private List<String> description;   
+    @ManyToOne
+    @JoinColumn(name = "resume_id", nullable = true)
+    private Resume resume;
+    @Column(insertable=false, updatable=false)
+    private Long resume_id;
 
 	public String getEmployer() {
 		return employer;
@@ -48,11 +72,23 @@ public class Experience {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	public ArrayList<String> getDescription() {
+	public List<String> getDescription() {
 		return description;
 	}
-	public void setDescription(ArrayList<String> description) {
+	public void setDescription(List<String> description) {
 		this.description = description;
+	}
+	public Resume getResume() {
+		return resume;
+	}
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+	public Long getResumeId() {
+		return this.resume_id;
+	}
+	public void setResumeId(Long resumeId) {
+		this.resume_id = resumeId;
 	}
 	@Override
 	public String toString() {

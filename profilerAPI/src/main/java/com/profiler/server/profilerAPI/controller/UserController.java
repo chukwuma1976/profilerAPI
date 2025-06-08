@@ -43,7 +43,7 @@ public class UserController {
 					content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)}),
 			@ApiResponse(responseCode="404", description="user not found")
 	})
-	public ResponseEntity<User> getUserById(@PathVariable String id) {
+	public ResponseEntity<User> getUserById(@PathVariable Long id) {
 		User user = userService.getUserById(id);
 		return ResponseEntity.ok(user);
 	}
@@ -76,7 +76,7 @@ public class UserController {
 			@ApiResponse(responseCode="200", description="success"),
 			@ApiResponse(responseCode="404", description="user not found")
 	})
-	public ResponseEntity<User> deleteUser(@PathVariable String id){
+	public ResponseEntity<User> deleteUser(@PathVariable Long id){
 		userService.deleteUser(id);
 		return ResponseEntity.ok().build();
 	}

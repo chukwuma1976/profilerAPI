@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.profiler.server.profilerAPI.model.Resume;
 
 @Repository
-public interface ResumeRepository extends JpaRepository<Resume, String> {
+public interface ResumeRepository extends JpaRepository<Resume, Long> {
 
-	List<Resume> findResumesByUserId(String user_id);
+	List<Resume> findResumesByUserId(Long id);
 	
 	@Query("SELECT r FROM Resume r WHERE r.shareWithOthers = true")
 	List<Resume> findAllResumesThatCanBeShared();

@@ -1,15 +1,17 @@
 package com.profiler.server.profilerAPI.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,8 +24,8 @@ import jakarta.persistence.JoinColumn;
 public class Resume {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;;
 	
 	@NotNull(message="You must enter a first name")
 	@NotBlank(message="You must enter a first name")
@@ -42,9 +44,11 @@ public class Resume {
 	private String linkedIn;
 	private String website;
 	private String summary;
-    private ArrayList<Experience> experience;
-    private ArrayList<Education> education;
-    private ArrayList<String> skills;
+	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experience> experience;
+	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Education> education;
+    private List<String> skills;
     private String additionalInfo;
     private boolean shareWithOthers;
     
@@ -52,10 +56,10 @@ public class Resume {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFirstName() {
@@ -100,22 +104,22 @@ public class Resume {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	public ArrayList<Experience> getExperience() {
+	public List<Experience> getExperience() {
 		return experience;
 	}
-	public void setExperience(ArrayList<Experience> experience) {
+	public void setExperience(List<Experience> experience) {
 		this.experience = experience;
 	}
-	public ArrayList<Education> getEducation() {
+	public List<Education> getEducation() {
 		return education;
 	}
-	public void setEducation(ArrayList<Education> education) {
+	public void setEducation(List<Education> education) {
 		this.education = education;
 	}
-	public ArrayList<String> getSkills() {
+	public List<String> getSkills() {
 		return skills;
 	}
-	public void setSkills(ArrayList<String> skills) {
+	public void setSkills(List<String> skills) {
 		this.skills = skills;
 	}
 	public String getAdditionalInfo() {

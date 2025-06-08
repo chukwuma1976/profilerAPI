@@ -39,7 +39,7 @@ public class ResumeController {
 					content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)}),
 			@ApiResponse(responseCode="422", description="unprocessable entity")
 	})
-	public ResponseEntity<Resume> createResume(@Valid @RequestBody Resume resume, @PathVariable String userId){
+	public ResponseEntity<Resume> createResume(@Valid @RequestBody Resume resume, @PathVariable Long userId){
 		Resume createdResume = resumeService.addResumeByUser(resume, userId);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(resume.getId()).toUri();
@@ -62,7 +62,7 @@ public class ResumeController {
 					content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)}),
 			@ApiResponse(responseCode="404", description="resume not found")
 	})
-	public ResponseEntity<Resume> getResumeById(@PathVariable String id) {
+	public ResponseEntity<Resume> getResumeById(@PathVariable Long id) {
 		Resume foundResume = resumeService.getResumeById(id);
 		return ResponseEntity.ok(foundResume);
 	}
@@ -74,7 +74,7 @@ public class ResumeController {
 					content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)}),
 			@ApiResponse(responseCode="404", description="resume not found")
 	})
-	public List<Resume> getResumeByUser(@PathVariable String id) {
+	public List<Resume> getResumeByUser(@PathVariable Long id) {
 		return resumeService.getResumesByUserId(id);
 	}
 	
@@ -94,7 +94,7 @@ public class ResumeController {
 			@ApiResponse(responseCode="200", description="success"),
 			@ApiResponse(responseCode="404", description="resume not found")
 	})
-	public ResponseEntity<Resume> deleteResume(@PathVariable String id){
+	public ResponseEntity<Resume> deleteResume(@PathVariable Long id){
 		resumeService.deleteResume(id);
 		return ResponseEntity.ok().build();
 	}

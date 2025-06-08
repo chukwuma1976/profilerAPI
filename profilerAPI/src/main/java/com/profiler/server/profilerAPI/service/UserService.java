@@ -23,7 +23,7 @@ public class UserService {
 		return userRepo.findAll();
 	}
 	
-	public User getUserById (String id) {
+	public User getUserById (Long id) {
 		if (userRepo.findById(id).isPresent())
 			return userRepo.findById(id).get();
 		else throw new UserNotFoundException("User with id " + id + " does not exist");
@@ -42,7 +42,7 @@ public class UserService {
 		return userRepo.save(updatedUser);
 	}
 	
-	public void deleteUser (String id) {
+	public void deleteUser (Long id) {
 		if (userRepo.findById(id).isPresent())
 			userRepo.deleteById(id);
 		else throw new UserNotFoundException("User with id " + id + " does not exist");
