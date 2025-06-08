@@ -10,7 +10,6 @@ import com.profiler.server.profilerAPI.exception.UserNotFoundException;
 import com.profiler.server.profilerAPI.model.Education;
 import com.profiler.server.profilerAPI.model.Experience;
 import com.profiler.server.profilerAPI.model.Resume;
-import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.repository.EducationRepository;
 import com.profiler.server.profilerAPI.repository.ExperienceRepository;
 import com.profiler.server.profilerAPI.repository.ResumeRepository;
@@ -34,19 +33,13 @@ public class ResumeService {
 	
 	public Resume addResumeByUser (Resume resume, Long userId) {
 		if (this.userRepo.findById(userId).isPresent()) {
-			User user = this.userRepo.findById(userId).get();
-			Resume newResume = this.initializeResume(resume, user);
-//			List<Resume> resumes = user.getResumes();
-//			resumes.add(newResume);
-//			user.setResumes(resumes);
-//			this.userRepo.save(user);
+			Resume newResume = this.initializeResume(resume, userId);
 			return newResume;
 		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
 	
-	public Resume initializeResume (Resume resume, User user) {
-		resume.setUserId(user.getId());
-//		resume.setUser(user);
+	public Resume initializeResume (Resume resume, Long userId) {
+		resume.setUserId(userId);
 		Resume newResume = this.resumeRepo.save(resume);
 		for (Experience experience : newResume.getExperience()) {
 			experience.setResumeId(newResume.getId());
@@ -91,7 +84,9 @@ public class ResumeService {
 		updatedResume.setAdditionalInfo(resume.getAdditionalInfo());
 		updatedResume.setShareWithOthers(resume.isShareWithOthers());
 		
-		return resumeRepo.save(updatedResume);
+		Resume processUpdatedResume = this.initializeResume(updatedResume, updatedResume.getUserId());
+		
+		return resumeRepo.save(processUpdatedResume);
 	}
 	
 	public void deleteResume (Long id) {

@@ -33,7 +33,7 @@ public class ResumeController {
 	private ResumeService resumeService;
 	
 	@PostMapping("/{userId}")
-	@Operation(summary="This creates a new resume")
+	@Operation(summary="This creates a new resume under a user id")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode="201", description="accepted",
 					content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)}),
@@ -83,7 +83,7 @@ public class ResumeController {
 	@ApiResponses(value = {@ApiResponse(responseCode="200", description="success",
 	content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)})}
 	)
-	public Resume updateResume (@Valid @PathVariable String id, @RequestBody Resume resume) {
+	public Resume updateResume (@Valid @PathVariable Long id, @RequestBody Resume resume) {
 		resumeService.getResumeById(resume.getId());
 		return resumeService.updateResume(resume);
 	}
