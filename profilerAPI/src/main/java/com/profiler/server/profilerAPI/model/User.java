@@ -1,17 +1,13 @@
 package com.profiler.server.profilerAPI.model;
 
-import java.util.List;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -38,9 +34,6 @@ public class User {
 	@NotNull(message="You must enter a password")
 	@NotBlank(message="You must enter a password")
 	private String password;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Resume> resumes;
 	
 	private String resetToken; // for forgot password
     
@@ -80,21 +73,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Resume> getResumes() {
-		return resumes;
-	}
-	public void setResumes(List<Resume> resumes) {
-		this.resumes = resumes;
-	}
 	public String getResetToken() {
 		return resetToken;
 	}
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
 	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", resumes=" + resumes + "]";
+				+ ", resetToken=" + resetToken + "]";
 	}
+
 }

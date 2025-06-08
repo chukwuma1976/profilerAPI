@@ -36,16 +36,17 @@ public class ResumeService {
 		if (this.userRepo.findById(userId).isPresent()) {
 			User user = this.userRepo.findById(userId).get();
 			Resume newResume = this.initializeResume(resume, user);
-			List<Resume> resumes = user.getResumes();
-			resumes.add(newResume);
-			user.setResumes(resumes);
-			this.userRepo.save(user);
+//			List<Resume> resumes = user.getResumes();
+//			resumes.add(newResume);
+//			user.setResumes(resumes);
+//			this.userRepo.save(user);
 			return newResume;
 		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
 	
 	public Resume initializeResume (Resume resume, User user) {
-		resume.setUser(user);
+		resume.setUserId(user.getId());
+//		resume.setUser(user);
 		Resume newResume = this.resumeRepo.save(resume);
 		for (Experience experience : newResume.getExperience()) {
 			experience.setResumeId(newResume.getId());

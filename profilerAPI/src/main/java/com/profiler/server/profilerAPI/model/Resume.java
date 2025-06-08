@@ -10,12 +10,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.persistence.JoinColumn;
 
 @Entity
 @Component
@@ -51,10 +49,7 @@ public class Resume {
     private List<String> skills;
     private String additionalInfo;
     private boolean shareWithOthers;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Long userId;
     
 	public Long getId() {
 		return id;
@@ -134,20 +129,19 @@ public class Resume {
 	public void setShareWithOthers(boolean shareWithOthers) {
 		this.shareWithOthers = shareWithOthers;
 	}
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
 		return "Resume [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", email=" + email + ", linkedIn=" + linkedIn + ", website=" + website + ", summary="
 				+ summary + ", experience=" + experience + ", education=" + education + ", skills=" + skills
-				+ ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers + ", user=" + user
+				+ ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers + ", userId=" + userId
 				+ "]";
-	}
-	
+	}	
     
 }
