@@ -1,5 +1,6 @@
 package com.profiler.server.profilerAPI.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User body, HttpSession session) {
+    public String login(@RequestBody User body, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
         String username = body.getUsername();
         String password = body.getPassword();
         if (authService.authenticate(username, password)) {
@@ -37,13 +39,15 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
         session.invalidate();
         return "Logged out";
     }
 
     @GetMapping("/check")
-    public String checkSession(HttpSession session) {
+    public String checkSession(HttpServletRequest request) {
+    	HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         return username != null ? "Logged in as " + username : "Not logged in";
     }

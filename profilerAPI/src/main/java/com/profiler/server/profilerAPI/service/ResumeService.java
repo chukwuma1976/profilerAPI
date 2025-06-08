@@ -42,11 +42,13 @@ public class ResumeService {
 		resume.setUserId(userId);
 		Resume newResume = this.resumeRepo.save(resume);
 		for (Experience experience : newResume.getExperience()) {
-			experience.setResumeId(newResume.getId());
+			experience.setResume(newResume);
+//			experience.setResumeId(newResume.getId());
 			experienceRepo.save(experience);
 		}
 		for (Education education : newResume.getEducation()) {
-			education.setResumeId(newResume.getId());
+			education.setResume(newResume);
+//			education.setResumeId(newResume.getId());
 			educationRepo.save(education);
 		}
 		resumeRepo.save(newResume);

@@ -33,8 +33,8 @@ public class Experience {
     @ManyToOne
     @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
-    @Column(insertable=false, updatable=false)
-    private Long resume_id;
+//    @Column(insertable=false, updatable=false)
+//    private Long resume_id;
 
 	public String getEmployer() {
 		return employer;
@@ -78,18 +78,18 @@ public class Experience {
 	public void setDescription(List<String> description) {
 		this.description = description;
 	}
-	public Resume getResume() {
-		return resume;
-	}
+//	public Resume getResume() {
+//		return resume;
+//	}
 	public void setResume(Resume resume) {
 		this.resume = resume;
 	}
-	public Long getResumeId() {
-		return this.resume_id;
-	}
-	public void setResumeId(Long resumeId) {
-		this.resume_id = resumeId;
-	}
+//	public Long getResumeId() {
+//		return this.resume_id;
+//	}
+//	public void setResumeId(Long resumeId) {
+//		this.resume_id = resumeId;
+//	}
 	@Override
 	public String toString() {
 		return "Experience [employer=" + employer + ", title=" + title + ", city=" + city + ", state=" + state

@@ -34,8 +34,8 @@ public class Education {
     @ManyToOne
     @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
-    @Column(insertable=false, updatable=false)
-    private Long resume_id;
+//    @Column(insertable=false, updatable=false)
+//    private Long resume_id;
 	
 	public String getInstitution() {
 		return institution;
@@ -85,12 +85,18 @@ public class Education {
 	public void setAwards(List<String> awards) {
 		this.awards = awards;
 	}
-	public Long getResumeId() {
-		return this.resume_id;
+//	public Resume getResume() {
+//		return resume;
+//	}
+	public void setResume(Resume resume) {
+		this.resume = resume;
 	}
-	public void setResumeId(Long resumeId) {
-		this.resume_id = resumeId;
-	}
+//	public Long getResumeId() {
+//		return this.resume_id;
+//	}
+//	public void setResumeId(Long resumeId) {
+//		this.resume_id = resumeId;
+//	}
 	@Override
 	public String toString() {
 		return "Education [institution=" + institution + ", city=" + city + ", state=" + state + ", degree=" + degree
