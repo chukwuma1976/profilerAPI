@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.profiler.server.profilerAPI.model.Resume;
 import com.profiler.server.profilerAPI.service.ResumeService;
+import com.profiler.server.profilerAPI.service.SeedDataBaseService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,6 +35,17 @@ import jakarta.validation.Valid;
 public class ResumeController {
 	@Autowired
 	private ResumeService resumeService;
+	@Autowired
+	private SeedDataBaseService seedData;
+	
+	@GetMapping("/seed-data")
+	@Operation(summary="This seeds the database")
+	@ApiResponses(value = {@ApiResponse(responseCode="200", description="success",
+	content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)})}
+	)
+	public void seedResumes() throws JsonProcessingException{
+		seedData.seedData();
+	}
 	
 	@PostMapping("/{userId}")
 	@Operation(summary="This creates a new resume under a user id")
