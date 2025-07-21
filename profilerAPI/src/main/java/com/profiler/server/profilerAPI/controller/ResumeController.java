@@ -61,6 +61,16 @@ public class ResumeController {
 		return ResponseEntity.created(location).body(createdResume);
 	}
 	
+//	This gets all resumes whether they can be shared or not, ONLY FOR TESTING
+	@GetMapping("all")
+	@Operation(summary="This returns all sharable and non-sharable resumes")
+	@ApiResponses(value = {@ApiResponse(responseCode="200", description="success",
+	content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)})}
+	)
+	public List<Resume> getAllResumes(){
+		return resumeService.getAllSharedAndUnsharedResumes();
+	}
+	
 	@GetMapping()
 	@Operation(summary="This returns all sharable resumes")
 	@ApiResponses(value = {@ApiResponse(responseCode="200", description="success",

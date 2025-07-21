@@ -31,11 +31,15 @@ public class Education {
 	private String descriptionEdu;
 	private List<String> awards;
     @ManyToOne
-    @JoinColumn(name = "resume_id", nullable = true)
+//    @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
-//    @Column(insertable=false, updatable=false)
-//    private Long resume_id;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getInstitution() {
 		return institution;
 	}

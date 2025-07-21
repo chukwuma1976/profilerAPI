@@ -42,9 +42,9 @@ public class Resume {
 	private String linkedIn;
 	private String website;
 	private String summary;
-	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
     private List<Experience> experience;
-	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
     private List<Education> education;
     private List<String> skills;
     private String additionalInfo;

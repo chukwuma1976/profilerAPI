@@ -33,26 +33,33 @@ public class ResumeService {
 	
 	public Resume addResumeByUser (Resume resume, Long userId) {
 		if (this.userRepo.findById(userId).isPresent()) {
-			Resume newResume = this.initializeResume(resume, userId);
+			resume.setUserId(userId);
+			Resume newResume = this.resumeRepo.save(resume);
+			for (Experience experience : newResume.getExperience()) {
+				experience.setResume(newResume);
+				this.experienceRepo.save(experience);
+			}
+			for (Education education : newResume.getEducation()) {
+				education.setResume(newResume);
+				this.educationRepo.save(education);
+			}
+			resumeRepo.save(newResume);
 			return newResume;
 		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
 	
-	public Resume initializeResume (Resume resume, Long userId) {
-		resume.setUserId(userId);
-		Resume newResume = this.resumeRepo.save(resume);
-		for (Experience experience : newResume.getExperience()) {
-			experience.setResume(newResume);
-//			experience.setResumeId(newResume.getId());
-			experienceRepo.save(experience);
-		}
-		for (Education education : newResume.getEducation()) {
-			education.setResume(newResume);
-//			education.setResumeId(newResume.getId());
-			educationRepo.save(education);
-		}
-		resumeRepo.save(newResume);
-		return newResume;
+//	public void removeChildren (Resume resume) {
+//		for (Experience experience : resume.getExperience()) {
+//			this.experienceRepo.deleteById(experience.getId());
+//		}
+//		for (Education education : resume.getEducation()) {
+//			this.educationRepo.deleteById(education.getId());
+//		}
+//	}
+	
+	//This gets all resumes whether they can be shared or not, ONLY FOR TESTING
+	public List<Resume> getAllSharedAndUnsharedResumes(){
+		return this.resumeRepo.findAll();
 	}
 	
 	//This only gets Resumes that are allowed to be shared with other users
@@ -71,7 +78,8 @@ public class ResumeService {
 	}
 	
 	public Resume updateResume (Resume resume) {
-		Resume updatedResume = resumeRepo.findById(resume.getId()).get();
+		Resume updatedResume = this.resumeRepo.findById(resume.getId()).get();
+//		this.removeChildren(updatedResume);
 		
 		updatedResume.setFirstName(resume.getFirstName());
 		updatedResume.setLastName(resume.getLastName());
@@ -86,9 +94,13 @@ public class ResumeService {
 		updatedResume.setAdditionalInfo(resume.getAdditionalInfo());
 		updatedResume.setShareWithOthers(resume.isShareWithOthers());
 		
-		Resume processUpdatedResume = this.initializeResume(updatedResume, updatedResume.getUserId());
+		updatedResume.setExperience(resume.getExperience());
+		updatedResume.setEducation(resume.getEducation());
 		
-		return resumeRepo.save(processUpdatedResume);
+//		Resume processUpdatedResume = this.initializeResume(updatedResume, updatedResume.getUserId());
+//		
+//		return resumeRepo.save(processUpdatedResume);
+		return resumeRepo.save(updatedResume);
 	}
 	
 	public void deleteResume (Long id) {

@@ -30,11 +30,15 @@ public class Experience {
     private String endDate;
     private List<String> description;   
     @ManyToOne
-    @JoinColumn(name = "resume_id", nullable = true)
+//    @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
-//    @Column(insertable=false, updatable=false)
-//    private Long resume_id;
 
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getEmployer() {
 		return employer;
 	}
