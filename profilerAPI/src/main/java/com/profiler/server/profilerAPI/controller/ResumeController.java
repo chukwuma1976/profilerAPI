@@ -109,7 +109,7 @@ public class ResumeController {
 	content= {@Content(mediaType=MediaType.APPLICATION_JSON_VALUE)})}
 	)
 	public Resume updateResume (@Valid @PathVariable Long id, @RequestBody Resume resume) {
-		resumeService.getResumeById(resume.getId());
+		resumeService.getResumeById(id);
 		return resumeService.updateResume(resume);
 	}
 	

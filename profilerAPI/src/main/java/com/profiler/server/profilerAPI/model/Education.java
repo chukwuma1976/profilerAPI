@@ -31,7 +31,7 @@ public class Education {
 	private String descriptionEdu;
 	private List<String> awards;
     @ManyToOne
-//    @JoinColumn(name = "resume_id", nullable = true)
+    @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
 	
 	public Long getId() {
