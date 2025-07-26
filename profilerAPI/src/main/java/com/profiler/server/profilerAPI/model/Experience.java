@@ -30,7 +30,7 @@ public class Experience {
     private String endDate;
     private List<String> description;   
     @ManyToOne
-    @JoinColumn(name = "resume_id", nullable = true)
+//    @JoinColumn(name = "resume_id", nullable = true)
     private Resume resume;
 
 	public Long getId() {
