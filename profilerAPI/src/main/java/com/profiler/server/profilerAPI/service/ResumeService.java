@@ -40,7 +40,7 @@ public class ResumeService {
 			newResume.getExperience().forEach(experience -> experience.setResume(newResume));
 			newResume.getEducation().forEach(education -> education.setResume(newResume));
 			
-			resumeRepo.save(newResume);
+			this.resumeRepo.save(newResume);
 			return newResume;
 		} else throw new UserNotFoundException("User with id " + userId + " does not exist");
 	}
@@ -86,7 +86,7 @@ public class ResumeService {
 		updatedResume.getExperience().forEach(experience -> experience.setResume(updatedResume));
 		updatedResume.getEducation().forEach(education -> education.setResume(updatedResume));
 		
-		return resumeRepo.save(updatedResume);
+		return this.resumeRepo.save(updatedResume);
 	}
 	
 	public void deleteResume (Long id) {
