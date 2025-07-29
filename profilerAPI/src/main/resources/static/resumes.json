@@ -110,7 +110,7 @@
             "Leadership",
             "Philanthropy"
         ],
-        "shareWithOthers": false,
+        "shareWithOthers": true,
         "additionalInfo": "Passionate about technology and innovation. Active in various charitable organizations."
     },
     {
@@ -192,7 +192,7 @@
             "Spring Boot"
         ],
         "additionalInfo": "I am a career changer",
-        "shareWithOthers": false
+        "shareWithOthers": true
     },
     {
         "firstName": "Chris",
@@ -262,7 +262,7 @@
             "Advanced Anorectal Surgery"
         ],
         "additionalInfo": "I am a fellow of the American College of Surgeons and a member of the Society of American Gastrointestinal and Endoscopic Surgeons.",
-        "shareWithOthers": false
+        "shareWithOthers": true
     },
     {
         "firstName": "Clark",
