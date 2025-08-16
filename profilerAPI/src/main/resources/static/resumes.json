@@ -2,6 +2,7 @@
     {
         "firstName": "Clark",
         "lastName": "Kent",
+		"title": "Reporter",
         "phoneNumber": "123-456-7890",
         "email": "clark.kent@dailyplanet.com",
         "linkedIn": "https://www.linkedin.com/in/clarkkent",
@@ -55,12 +56,23 @@
             "Editing",
             "Public Speaking"
         ],
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": [],
+		"volunteerExperience": [
+			"Save cats from trees organization",
+			"The Big Blue Boy Scout"
+		],
         "shareWithOthers": true,
+		"template": "chronological",
         "additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
     },
     {
         "firstName": "Bruce",
         "lastName": "Wayne",
+		"title": "CEO",
         "phoneNumber": "987-654-3210",
         "email": "BruceWayne@WayneEnterprises.com",
         "linkedIn": "https://www.linkedin.com/in/brucewayne",
@@ -110,12 +122,22 @@
             "Leadership",
             "Philanthropy"
         ],
-        "shareWithOthers": true,
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": [],
+		"volunteerExperience": [
+			"Make Gotham Better"
+		],
+		"shareWithOthers": true,
+		"template": "chronological",
         "additionalInfo": "Passionate about technology and innovation. Active in various charitable organizations."
     },
     {
         "firstName": "Chris",
         "lastName": "Jones",
+		"title": "Software Engineer",
         "phoneNumber": "123456789",
         "email": "chris.jones@gmail.com",
         "linkedIn": "www.linkedin.com/in/chrisjones/",
@@ -191,12 +213,21 @@
             "Java",
             "Spring Boot"
         ],
+		"certifications": ["Software Engineering"],
+		"projects": [
+			"Healthcare System Interface",
+			"ProFiler"
+		],
+		"publications": [],
+		"volunteerExperience": [],
+		"template": "chronological",
         "additionalInfo": "I am a career changer",
         "shareWithOthers": true
     },
     {
         "firstName": "Chris",
         "lastName": "Jones",
+		"title": "Colon and Rectal Surgeon",
         "phoneNumber": "123456789",
         "email": "chris.jones@gmail.com",
         "linkedIn": "www.linkedin.com/in/chrisjones/",
@@ -261,12 +292,22 @@
             "Robotic Surgery",
             "Advanced Anorectal Surgery"
         ],
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": ["BNP Stunning in Rabbit Myocardium"],
+		"volunteerExperience": [
+			"HE Matters"
+		],
+		"template": "functional",
         "additionalInfo": "I am a fellow of the American College of Surgeons and a member of the Society of American Gastrointestinal and Endoscopic Surgeons.",
         "shareWithOthers": true
     },
     {
         "firstName": "Clark",
         "lastName": "Kent",
+		"title": "Leader of the Justice League",
         "phoneNumber": "123-456-7890",
         "email": "clark.kent@dailyplanet.com",
         "linkedIn": "https://www.linkedin.com/in/clarkkent",
@@ -335,12 +376,23 @@
             "Heat Vision",
             "Super Strength"
         ],
-        "shareWithOthers": true,
-        "additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
-    },
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": [],
+		"volunteerExperience": [
+			"Save cats from trees organization",
+			"The Big Blue Boy Scout"
+		],
+	    "shareWithOthers": true,
+			"template": "chronological",
+	    "additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
+	},
     {
         "firstName": "Diana",
         "lastName": "Prince",
+		"title": "Amazonian Princess",
         "phoneNumber": "321-654-0987",
         "email": "Diana.Prince@gmail.com",
         "linkedIn": "https://www.linkedin.com/in/dianaprince",
@@ -395,12 +447,22 @@
             "Flight",
             "Lasso of Truth"
         ],
-        "shareWithOthers": true,
-        "additionalInfo": "Fluent in multiple languages. Passionate about equality and justice for all."
-    },
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": [],
+		"volunteerExperience": [
+			"Compel the Truth"
+		],
+	    "shareWithOthers": true,
+		"template": "chronological",
+		"additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
+	},
     {
         "firstName": "Barry",
         "lastName": "Allen",
+		"title": "Forensic Scientist",
         "phoneNumber": "456-789-1230",
         "email": "Barry.Allen@centralcitypd.com",
         "linkedIn": "https://www.linkedin.com/in/barryallen",
@@ -453,12 +515,20 @@
             "Super Speed",
             "Problem Solving"
         ],
-        "shareWithOthers": true,
-        "additionalInfo": "Fluent in English and Spanish. Passionate about using science to solve crimes and help others."
-    },
+		"certifications": [],
+		"projects": [
+			"Crisis on Infinite Earths"
+		],
+		"publications": [],
+		"volunteerExperience": [],
+		"shareWithOthers": true,
+		"template": "chronological",
+		"additionalInfo": ""
+	},
     {
         "firstName": "Peter",
         "lastName": "Parker",
+		"title": "Freelance Photographer",
         "phoneNumber": "555-123-4567",
         "email": "Peter.Parker@ParkerIndustries.com",
         "linkedIn": "https://www.linkedin.com/in/peterparker",
@@ -512,6 +582,10 @@
             "Agility",
             "Spider-Sense"
         ],
-        "shareWithOthers": true
+		"publications": [],
+		"volunteerExperience": [],
+		"shareWithOthers": true,
+		"template": "chronological",
+		"additionalInfo": ""
     }
 ]

@@ -33,6 +33,7 @@ public class Resume {
 	@NotBlank(message="You must enter a last name")
 	private String lastName;
 	
+	private String title;
 	private String phoneNumber;
 	
 	@NotNull(message="You must enter an email")
@@ -47,8 +48,13 @@ public class Resume {
 	@OneToMany(mappedBy = "resume", cascade = CascadeType.ALL)
     private List<Education> education;
     private List<String> skills;
+    private List<String> certifications;
+    private List<String> projects;
+    private List<String> publications;
+    private List<String> volunteerExperience;
     private String additionalInfo;
     private boolean shareWithOthers;
+    private String template;
     private Long userId;
     
 	public Long getId() {
@@ -135,13 +141,51 @@ public class Resume {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public List<String> getCertifications() {
+		return certifications;
+	}
+	public void setCertifications(List<String> certifications) {
+		this.certifications = certifications;
+	}
+	public List<String> getProjects() {
+		return projects;
+	}
+	public void setProjects(List<String> projects) {
+		this.projects = projects;
+	}
+	public List<String> getPublications() {
+		return publications;
+	}
+	public void setPublications(List<String> publications) {
+		this.publications = publications;
+	}
+	public List<String> getVolunteerExperience() {
+		return volunteerExperience;
+	}
+	public void setVolunteerExperience(List<String> volunteerExperience) {
+		this.volunteerExperience = volunteerExperience;
+	}
+	public String getTemplate() {
+		return template;
+	}
+	public void setTemplate(String template) {
+		this.template = template;
+	}
 	@Override
 	public String toString() {
-		return "Resume [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", email=" + email + ", linkedIn=" + linkedIn + ", website=" + website + ", summary="
-				+ summary + ", experience=" + experience + ", education=" + education + ", skills=" + skills
-				+ ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers + ", userId=" + userId
-				+ "]";
+		return "Resume [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
+				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", linkedIn=" + linkedIn + ", website="
+				+ website + ", summary=" + summary + ", experience=" + experience + ", education=" + education
+				+ ", skills=" + skills + ", certifications=" + certifications + ", projects=" + projects
+				+ ", publications=" + publications + ", volunteerExperience=" + volunteerExperience
+				+ ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers + ", template="
+				+ template + ", userId=" + userId + "]";
 	}	
     
 }

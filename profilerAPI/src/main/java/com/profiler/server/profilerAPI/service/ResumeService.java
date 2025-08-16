@@ -22,10 +22,6 @@ public class ResumeService {
 	private ResumeRepository resumeRepo;
 	@Autowired
 	private UserRepository userRepo;
-	@Autowired
-	private ExperienceRepository experienceRepo;
-	@Autowired
-	private EducationRepository educationRepo;
 	
 	public Resume createResume (Resume resume) {
 		return this.resumeRepo.save(resume);
@@ -71,6 +67,7 @@ public class ResumeService {
 		
 		updatedResume.setFirstName(resume.getFirstName());
 		updatedResume.setLastName(resume.getLastName());
+		updatedResume.setTitle(resume.getTitle());
 		updatedResume.setPhoneNumber(resume.getPhoneNumber());
 		updatedResume.setEmail(resume.getEmail());
 		updatedResume.setLinkedIn(resume.getLinkedIn());
@@ -79,8 +76,13 @@ public class ResumeService {
 		updatedResume.setExperience(resume.getExperience());
 		updatedResume.setEducation(resume.getEducation());
 		updatedResume.setSkills(resume.getSkills());
+		updatedResume.setCertifications(resume.getCertifications());
+		updatedResume.setProjects(resume.getProjects());
+		updatedResume.setPublications(resume.getPublications());
+		updatedResume.setVolunteerExperience(resume.getVolunteerExperience());
 		updatedResume.setAdditionalInfo(resume.getAdditionalInfo());
 		updatedResume.setShareWithOthers(resume.isShareWithOthers());
+		updatedResume.setTemplate(resume.getTemplate());
 		
 		//link experience and education to updated resume 
 		updatedResume.getExperience().forEach(experience -> experience.setResume(updatedResume));
