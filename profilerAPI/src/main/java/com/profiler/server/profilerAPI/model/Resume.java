@@ -34,6 +34,8 @@ public class Resume {
 	private String lastName;
 	
 	private String title;
+	private String city;
+	private String state;
 	private String phoneNumber;
 	
 	@NotNull(message="You must enter an email")
@@ -177,15 +179,27 @@ public class Resume {
 	public void setTemplate(String template) {
 		this.template = template;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "Resume [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", title=" + title
-				+ ", phoneNumber=" + phoneNumber + ", email=" + email + ", linkedIn=" + linkedIn + ", website="
-				+ website + ", summary=" + summary + ", experience=" + experience + ", education=" + education
-				+ ", skills=" + skills + ", certifications=" + certifications + ", projects=" + projects
-				+ ", publications=" + publications + ", volunteerExperience=" + volunteerExperience
-				+ ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers + ", template="
-				+ template + ", userId=" + userId + "]";
+				+ ", city=" + city + ", state=" + state + ", phoneNumber=" + phoneNumber + ", email=" + email
+				+ ", linkedIn=" + linkedIn + ", website=" + website + ", summary=" + summary + ", experience="
+				+ experience + ", education=" + education + ", skills=" + skills + ", certifications=" + certifications
+				+ ", projects=" + projects + ", publications=" + publications + ", volunteerExperience="
+				+ volunteerExperience + ", additionalInfo=" + additionalInfo + ", shareWithOthers=" + shareWithOthers
+				+ ", template=" + template + ", userId=" + userId + "]";
 	}	
     
 }

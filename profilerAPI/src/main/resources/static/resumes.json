@@ -3,6 +3,8 @@
         "firstName": "Clark",
         "lastName": "Kent",
 		"title": "Reporter",
+		"city": "Metropolis",
+		"state": "NY",
         "phoneNumber": "123-456-7890",
         "email": "clark.kent@dailyplanet.com",
         "linkedIn": "https://www.linkedin.com/in/clarkkent",
@@ -73,6 +75,8 @@
         "firstName": "Bruce",
         "lastName": "Wayne",
 		"title": "CEO",
+		"city": "Gotham",
+		"state": "NJ",
         "phoneNumber": "987-654-3210",
         "email": "BruceWayne@WayneEnterprises.com",
         "linkedIn": "https://www.linkedin.com/in/brucewayne",
@@ -131,13 +135,15 @@
 			"Make Gotham Better"
 		],
 		"shareWithOthers": true,
-		"template": "chronological",
+		"template": "combination",
         "additionalInfo": "Passionate about technology and innovation. Active in various charitable organizations."
     },
     {
         "firstName": "Chris",
         "lastName": "Jones",
 		"title": "Software Engineer",
+		"city": "Fort Worth",
+		"state": "TX",
         "phoneNumber": "123456789",
         "email": "chris.jones@gmail.com",
         "linkedIn": "www.linkedin.com/in/chrisjones/",
@@ -228,6 +234,8 @@
         "firstName": "Chris",
         "lastName": "Jones",
 		"title": "Colon and Rectal Surgeon",
+		"city": "Baltimore",
+		"state": "MD",
         "phoneNumber": "123456789",
         "email": "chris.jones@gmail.com",
         "linkedIn": "www.linkedin.com/in/chrisjones/",
@@ -308,6 +316,8 @@
         "firstName": "Clark",
         "lastName": "Kent",
 		"title": "Leader of the Justice League",
+		"city": "Smallville",
+		"state": "Kansas",
         "phoneNumber": "123-456-7890",
         "email": "clark.kent@dailyplanet.com",
         "linkedIn": "https://www.linkedin.com/in/clarkkent",
@@ -386,13 +396,15 @@
 			"The Big Blue Boy Scout"
 		],
 	    "shareWithOthers": true,
-			"template": "chronological",
+		"template": "functional",
 	    "additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
 	},
     {
         "firstName": "Diana",
         "lastName": "Prince",
 		"title": "Amazonian Princess",
+		"city": "New York",
+		"state": "NY",
         "phoneNumber": "321-654-0987",
         "email": "Diana.Prince@gmail.com",
         "linkedIn": "https://www.linkedin.com/in/dianaprince",
@@ -456,12 +468,14 @@
 			"Compel the Truth"
 		],
 	    "shareWithOthers": true,
-		"template": "chronological",
-		"additionalInfo": "Fluent in English and Spanish. Passionate about social justice and community service."
+		"template": "modern",
+		"additionalInfo": "Fluent in multiple languages. Passionate about social justice and community service."
 	},
     {
         "firstName": "Barry",
         "lastName": "Allen",
+		"city": "Keystone City",
+		"state": "MO",
 		"title": "Forensic Scientist",
         "phoneNumber": "456-789-1230",
         "email": "Barry.Allen@centralcitypd.com",
@@ -522,12 +536,14 @@
 		"publications": [],
 		"volunteerExperience": [],
 		"shareWithOthers": true,
-		"template": "chronological",
+		"template": "simple",
 		"additionalInfo": ""
 	},
     {
         "firstName": "Peter",
         "lastName": "Parker",
+		"city": "New York",
+		"state": "NY",
 		"title": "Freelance Photographer",
         "phoneNumber": "555-123-4567",
         "email": "Peter.Parker@ParkerIndustries.com",
@@ -585,7 +601,7 @@
 		"publications": [],
 		"volunteerExperience": [],
 		"shareWithOthers": true,
-		"template": "chronological",
+		"template": "creative",
 		"additionalInfo": ""
     }
 ]

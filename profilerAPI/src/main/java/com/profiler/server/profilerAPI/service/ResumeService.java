@@ -68,6 +68,8 @@ public class ResumeService {
 		updatedResume.setFirstName(resume.getFirstName());
 		updatedResume.setLastName(resume.getLastName());
 		updatedResume.setTitle(resume.getTitle());
+		updatedResume.setCity(resume.getCity());
+		updatedResume.setState(resume.getState());
 		updatedResume.setPhoneNumber(resume.getPhoneNumber());
 		updatedResume.setEmail(resume.getEmail());
 		updatedResume.setLinkedIn(resume.getLinkedIn());
