@@ -1,6 +1,5 @@
 package com.profiler.server.profilerAPI.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import com.profiler.server.profilerAPI.service.AuthService;
 public class AuthController {
     @Autowired
     private AuthService authService;
+    private HttpSession session;
 
     @PostMapping("/register")
     public String register(@RequestBody User body) {
@@ -26,12 +26,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User body, HttpServletRequest request) {
-    	HttpSession session = request.getSession();
+    public String login(@RequestBody User body, HttpSession session) {
         String username = body.getUsername();
         String password = body.getPassword();
         if (authService.authenticate(username, password)) {
-            session.setAttribute("username", username);
+        	this.session = session;
+            this.session.setAttribute("username", username);
             return "Login successful";
         } else {
             return "Invalid credentials";
@@ -39,16 +39,14 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-        session.invalidate();
+    public String logout() {
+        this.session.invalidate();
         return "Logged out";
     }
 
     @GetMapping("/check")
-    public String checkSession(HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
+    public String checkSession() {
+        String username = (String) this.session.getAttribute("username");
         return username != null ? "Logged in as " + username : "Not logged in";
     }
     

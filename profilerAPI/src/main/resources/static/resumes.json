@@ -226,7 +226,7 @@
 		],
 		"publications": [],
 		"volunteerExperience": [],
-		"template": "chronological",
+		"template": "minimalist",
         "additionalInfo": "I am a career changer",
         "shareWithOthers": true
     },
@@ -308,7 +308,7 @@
 		"volunteerExperience": [
 			"HE Matters"
 		],
-		"template": "functional",
+		"template": "ats friendly",
         "additionalInfo": "I am a fellow of the American College of Surgeons and a member of the Society of American Gastrointestinal and Endoscopic Surgeons.",
         "shareWithOthers": true
     },
@@ -601,7 +601,7 @@
 		"publications": [],
 		"volunteerExperience": [],
 		"shareWithOthers": true,
-		"template": "creative",
+		"template": "unique",
 		"additionalInfo": ""
     }
 ]

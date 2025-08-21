@@ -74,6 +74,11 @@
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.session/spring-session-core -->
+		<dependency>
+		    <groupId>org.springframework.session</groupId>
+		    <artifactId>spring-session-jdbc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.fdmgroup</groupId>
 			<artifactId>bakery-api</artifactId>
