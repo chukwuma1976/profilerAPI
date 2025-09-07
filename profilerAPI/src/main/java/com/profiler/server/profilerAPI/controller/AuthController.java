@@ -1,5 +1,6 @@
 package com.profiler.server.profilerAPI.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import com.profiler.server.profilerAPI.service.AuthService;
 public class AuthController {
     @Autowired
     private AuthService authService;
-    private HttpSession session;
 
     @PostMapping("/register")
     public String register(@RequestBody User body) {
@@ -26,28 +26,40 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody User body, HttpSession session) {
+    public String login(@RequestBody User body, HttpServletRequest request) {
         String username = body.getUsername();
         String password = body.getPassword();
+
         if (authService.authenticate(username, password)) {
-        	this.session = session;
-            this.session.setAttribute("username", username);
+            HttpSession session = request.getSession(true); // create if not exists
+            session.setAttribute("username", username);
+            session.setMaxInactiveInterval(30 * 60); // 30 minutes timeout
             return "Login successful";
         } else {
             return "Invalid credentials";
         }
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        this.session.invalidate();
-        return "Logged out";
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // destroy session
+            return "Logged out successfully";
+        }
+        return "No active session";
     }
-
+    
     @GetMapping("/check")
-    public String checkSession() {
-        String username = (String) this.session.getAttribute("username");
-        return username != null ? "Logged in as " + username : "Not logged in";
+    public String checkSession(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                return "Logged in as: " + username;
+            }
+        }
+        return "Not logged in";
     }
     
     @PostMapping("/forgot-password")
