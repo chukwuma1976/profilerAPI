@@ -1,19 +1,25 @@
 package com.profiler.server.profilerAPI.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.profiler.server.profilerAPI.model.ImageFile;
 import com.profiler.server.profilerAPI.model.User;
+import com.profiler.server.profilerAPI.repository.ImageRepository;
 import com.profiler.server.profilerAPI.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,7 +33,10 @@ import jakarta.validation.Valid;
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class UserController {
-	@Autowired UserService userService;
+	@Autowired 
+	UserService userService;
+	@Autowired 
+	ImageRepository imageRepository;
 	
 	@GetMapping()
 	@Operation(summary="This returns all users")
@@ -82,5 +91,48 @@ public class UserController {
 		userService.deleteUser(id);
 		return ResponseEntity.ok().build();
 	}
+	
+    // Upload or replace profile image
+    @PostMapping("/{userId}/profile-image")
+    public ResponseEntity<String> uploadProfileImage(@PathVariable Long userId,
+                                                     @RequestParam("file") MultipartFile file) {
+    	User user = userService.getUserById(userId);
 
+        try {
+            // Create new image
+            ImageFile img = new ImageFile();
+            img.setFileName(file.getOriginalFilename());
+            img.setContentType(file.getContentType());
+            img.setData(file.getBytes());
+
+            // If user already has a profile image, delete old one
+            if (user.getProfileImage() != null) {
+                imageRepository.delete(user.getProfileImage());
+            }
+
+            // Save new image
+            imageRepository.save(img);
+
+            user.setProfileImage(img);
+            userService.updateUser(user);
+
+            return ResponseEntity.ok("Profile image uploaded successfully for user " + user.getUsername());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Upload failed: " + e.getMessage());
+        }
+    }
+
+    // Get user's profile image
+    @GetMapping("/{userId}/profile-image")
+    public ResponseEntity<byte[]> getProfileImage(@PathVariable Long userId) {
+        User user =  userService.getUserById(userId);
+        if (user.getProfileImage() != null) {
+            ImageFile img = user.getProfileImage();
+            return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(img.getContentType()))
+                    .body(img.getData());
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

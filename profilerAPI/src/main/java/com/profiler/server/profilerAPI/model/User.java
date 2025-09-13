@@ -3,11 +3,14 @@ package com.profiler.server.profilerAPI.model;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,6 +39,11 @@ public class User {
 	private String password;
 	
 	private String resetToken; // for forgot password
+	
+	// One-to-one relationship with profile image
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private ImageFile profileImage;
     
 	public User(String username, String password, String email) {
 		super();
@@ -79,11 +87,16 @@ public class User {
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
 	}
+    public ImageFile getProfileImage() { 
+    	return profileImage;
+    }
+    public void setProfileImage(ImageFile profileImage) { 
+    	this.profileImage = profileImage; 
+    }
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", resetToken=" + resetToken + "]";
+				+ ", resetToken=" + resetToken + ", profileImage=" + profileImage + "]";
 	}
-
 }
