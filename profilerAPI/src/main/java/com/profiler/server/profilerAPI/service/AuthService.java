@@ -1,61 +1,71 @@
 package com.profiler.server.profilerAPI.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.repository.UserRepository;
 
+import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class AuthService {
-	
-	@Autowired
-	private UserRepository userRepo;
 
-    private final ConcurrentHashMap<String, User> users = new ConcurrentHashMap<>();
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private UserRepository userRepo;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    // ✅ Register a new user
     public boolean register(String username, String password, String email) {
-        if (users.containsKey(username)) return false;
+        if (userRepo.findByUsername(username) != null) {
+            return false; // username already exists
+        }
+
         String hashed = passwordEncoder.encode(password);
         User newUser = new User(username, hashed, email);
         userRepo.save(newUser);
-        users.put(username, newUser);
+
         return true;
     }
 
+    // ✅ Authenticate a user (login)
     public boolean authenticate(String username, String password) {
-        User user = users.get(username);
-        return user != null && passwordEncoder.matches(password, user.getPassword());
+        User user = userRepo.findByUsername(username);
+        if (user == null) return false;
+        return passwordEncoder.matches(password, user.getPassword());
     }
-    
+
+    // ✅ Start reset flow (generate token)
     public String initiatePasswordReset(String username) {
-        User user = users.get(username);
+        User user = userRepo.findByUsername(username);
         if (user == null) return null;
+
         String token = UUID.randomUUID().toString();
         user.setResetToken(token);
-        return token; // Normally you'd email this token
+        userRepo.save(user); // persist token
+
+        return token; // normally email this
     }
 
+    // ✅ Reset password with token
     public boolean resetPassword(String token, String newPassword) {
-        for (User user : users.values()) {
-            if (token.equals(user.getResetToken())) {
-                String newHashed = BCrypt.hashpw(newPassword, BCrypt.gensalt());
-                user.setPassword(newHashed);
-                user.setResetToken(null); // Invalidate token
-                return true;
-            }
-        }
-        return false;
+        User user = userRepo.findByResetToken(token);
+        if (user == null) return false;
+
+        String newHashed = passwordEncoder.encode(newPassword);
+        user.setPassword(newHashed);
+        user.setResetToken(null); // invalidate token
+        userRepo.save(user);
+
+        return true;
     }
 
+    // ✅ Check if user exists
     public boolean userExists(String username) {
-        return users.containsKey(username);
+        return userRepo.findByUsername(username) != null;
     }
-	
 }

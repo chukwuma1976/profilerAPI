@@ -1,6 +1,7 @@
 package com.profiler.server.profilerAPI.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,33 @@ public class UserService {
 		else throw new UserNotFoundException("User with id " + id + " does not exist");
 	}
 
+    public String initiatePasswordReset(String usernameOrEmail) {
+        User user = userRepo.findByUsername(usernameOrEmail);
+        if (user == null) {
+            user = userRepo.findByEmail(usernameOrEmail);
+        }
+        if (user == null) {
+            return null; // user not found
+        }
 
+        String token = UUID.randomUUID().toString();
+        user.setResetToken(token);
+        userRepo.save(user);
+
+        // TODO: send token by email instead of returning
+        return token;
+    }
+
+    public boolean resetPassword(String token, String newPassword) {
+        User user = userRepo.findByResetToken(token);
+        if (user == null) {
+            return false; // invalid token
+        }
+
+        user.setPassword(newPassword); // ⚠️ hash with PasswordEncoder in production
+        user.setResetToken(null); // clear token after use
+        userRepo.save(user);
+
+        return true;
+    }
 }

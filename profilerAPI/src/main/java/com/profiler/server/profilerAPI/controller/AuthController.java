@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.service.AuthService;
+import com.profiler.server.profilerAPI.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,9 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+    
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register")
     public Map<String, Object> register(@RequestBody User body) {
@@ -84,13 +88,14 @@ public class AuthController {
     }
 
     @PostMapping("/forgot-password")
-    public Map<String, Object> forgotPassword(@RequestBody User body) {
-        String token = authService.initiatePasswordReset(body.getUsername());
-        Map<String, Object> response = new HashMap<>();
+    public Map<String, Object> forgotPassword(@RequestBody Map<String, String> body) {
+        String usernameOrEmail = body.get("username");
+        String token = userService.initiatePasswordReset(usernameOrEmail);
 
+        Map<String, Object> response = new HashMap<>();
         if (token != null) {
             response.put("status", "success");
-            response.put("resetToken", token); // normally sent by email
+            response.put("resetToken", token); // ⚠️ normally send via email
         } else {
             response.put("status", "error");
             response.put("message", "User not found");
@@ -99,13 +104,16 @@ public class AuthController {
     }
 
     @PostMapping("/reset-password")
-    public Map<String, Object> resetPassword(@RequestBody User body) {
-        boolean result = authService.resetPassword(body.getResetToken(), body.getPassword());
-        Map<String, Object> response = new HashMap<>();
+    public Map<String, Object> resetPassword(@RequestBody Map<String, String> body) {
+        String token = body.get("token");
+        String newPassword = body.get("newPassword");
 
-        if (result) {
+        boolean success = userService.resetPassword(token, newPassword);
+
+        Map<String, Object> response = new HashMap<>();
+        if (success) {
             response.put("status", "success");
-            response.put("message", "Password reset successfully");
+            response.put("message", "Password successfully reset");
         } else {
             response.put("status", "error");
             response.put("message", "Invalid or expired token");
