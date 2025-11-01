@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.profiler.server.profilerAPI.model.User;
 import com.profiler.server.profilerAPI.repository.UserRepository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -51,13 +50,9 @@ public class AuthService {
     }
 
     public boolean resetPassword(String token, String newPassword) {
-        Optional<User> userOptional = userRepo.findAll()
-                .stream()
-                .filter(u -> token.equals(u.getResetToken()))
-                .findFirst();
-
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
+        User user = userRepo.findByResetToken(token);
+        
+        if (user != null) {
             user.setPassword(passwordEncoder.encode(newPassword));
             user.setResetToken(null);
             userRepo.save(user);
