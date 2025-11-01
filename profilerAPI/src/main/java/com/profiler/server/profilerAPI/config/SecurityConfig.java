@@ -27,8 +27,8 @@ public class SecurityConfig {
             	        "/api/v1/profiler/**"
             	    ).permitAll()
             	    .anyRequest().authenticated()
-            	)
-            .sessionManagement(session -> session.maximumSessions(1));
+            	);
+            // .sessionManagement(session -> session.maximumSessions(1));
         return http.build();
     }
 

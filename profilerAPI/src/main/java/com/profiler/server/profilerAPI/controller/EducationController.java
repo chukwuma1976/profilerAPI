@@ -28,7 +28,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/v1/profiler/educations")
-@CrossOrigin(origins = "http://localhost:4200")
 public class EducationController {
 	
 	@Autowired
