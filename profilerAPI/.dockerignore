@@ -1,0 +1,30 @@
+# Git files
+.git
+.gitignore
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
