@@ -24,12 +24,12 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/", "/index.html", "/favicon.ico", "/error").permitAll()
-                    .requestMatchers("/*.js", "/*.css", "/assets/**").permitAll()
-                    .requestMatchers("/{path:[^\\.]*}", "/**/{path:[^\\.]*}").permitAll()
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers(HttpMethod.HEAD, "/**").permitAll()
-            	    .requestMatchers("/api/v1/profiler/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/**").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/v1/profiler/**").permitAll()
+                    .requestMatchers(HttpMethod.PUT, "/api/v1/profiler/**").permitAll()
+                    .requestMatchers(HttpMethod.DELETE, "/api/v1/profiler/**").permitAll()
             	    .anyRequest().authenticated()
             	);
             // .sessionManagement(session -> session.maximumSessions(1));
